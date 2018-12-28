@@ -1,0 +1,11 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t fionactc/docker-react -f Dockerfile.dev .
+
+# travis assumes test that does not exit after running is problematic
+# Therefore -- --coverage is added to exit test
+script:
+  - docker run fionactc/docker-react npm run test -- --coverage
